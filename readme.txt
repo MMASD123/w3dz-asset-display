@@ -198,7 +198,7 @@ All 3D model rendering happens locally in the user's browser. No user data, prod
 
 == Support ==
 
-* **Community Support:** [WordPress.org Forum](https://wordpress.org/support/plugin/woo-3d-asset-display/)
+* **Community Support:** [WordPress.org Forum](https://wordpress.org/support/plugin/w3dz-asset-display/)
 * **Bug Reports:** Please use the WordPress.org support forum with detailed information
 * **Documentation:** See the FAQ section and plugin description for usage guides
 
