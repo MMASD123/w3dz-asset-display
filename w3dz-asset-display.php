@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: 3D Asset Display for WooCommerce
- * Plugin URI: https://wordpress.org/plugins/w3dz-asset-display
+ * Plugin URI: https://github.com/MMASD123/w3dz-asset-display
  * Description: Display 3D models (.glb/.gltf) and 360° image rotations for WooCommerce products with AR support
  * Version: 1.0.0
- * Author: Your Name
- * Author URI: https://example.com
+ * Author: Zyne
+ * Author URI: https://github.com/MMASD123
  * Text Domain: w3dz-asset-display
  * Requires at least: 6.2
  * Requires PHP: 7.4
