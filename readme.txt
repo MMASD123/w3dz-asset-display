@@ -1,7 +1,7 @@
 === 3D Asset Display for WooCommerce ===
 Contributors: littlerong
 Tags: woocommerce, 3d, model-viewer, glb, augmented-reality
-Requires at least: 6.2
+Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
 Stable tag: 1.0.0

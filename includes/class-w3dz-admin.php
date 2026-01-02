@@ -354,51 +354,57 @@ class W3DZ_Admin {
     
     /**
      * Save product meta data
+     * 
+     * SECURITY FIX: Properly verify WooCommerce nonce before processing form data
      */
     public function save_product_meta($post_id) {
-        // Verify nonce - WooCommerce handles this internally via woocommerce_process_product_meta
-        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- WooCommerce verifies nonce
-        if (!isset($_POST['woocommerce_meta_nonce'])) {
+        // SECURITY FIX: Verify nonce properly
+        // WooCommerce adds 'woocommerce_meta_nonce' to product edit forms
+        if (!isset($_POST['woocommerce_meta_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['woocommerce_meta_nonce'])), 'woocommerce_save_data')) {
+            return;
+        }
+        
+        // Check if user has permission to edit this post
+        if (!current_user_can('edit_post', $post_id)) {
+            return;
+        }
+        
+        // Check if not autosaving
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
             return;
         }
         
         // Save model type
-        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified above
         if (isset($_POST['w3dz_model_type'])) {
             $model_type = sanitize_text_field(wp_unslash($_POST['w3dz_model_type']));
             update_post_meta($post_id, '_w3dz_model_type', $model_type);
         }
         
         // Save GLB URL
-        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified above
         if (isset($_POST['w3dz_glb_url'])) {
             $glb_url = esc_url_raw(wp_unslash($_POST['w3dz_glb_url']));
             update_post_meta($post_id, '_w3dz_glb_url', $glb_url);
         }
         
         // Save USDZ URL
-        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified above
         if (isset($_POST['w3dz_usdz_url'])) {
             $usdz_url = esc_url_raw(wp_unslash($_POST['w3dz_usdz_url']));
             update_post_meta($post_id, '_w3dz_usdz_url', $usdz_url);
         }
         
         // Save Poster URL
-        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified above
         if (isset($_POST['w3dz_poster_url'])) {
             $poster_url = esc_url_raw(wp_unslash($_POST['w3dz_poster_url']));
             update_post_meta($post_id, '_w3dz_poster_url', $poster_url);
         }
         
         // Save 360 images
-        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified above
         if (isset($_POST['w3dz_360_images'])) {
             $image_ids = sanitize_text_field(wp_unslash($_POST['w3dz_360_images']));
             update_post_meta($post_id, '_w3dz_360_images', $image_ids);
         }
         
         // Save camera orbit (Visual Editor format)
-        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified above
         if (isset($_POST['w3dz_camera_orbit'])) {
             $camera_orbit = sanitize_text_field(wp_unslash($_POST['w3dz_camera_orbit']));
             
