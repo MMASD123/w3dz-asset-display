@@ -1,0 +1,320 @@
+/**
+ * WooCommerce 3D Asset Display Zyne - Admin Styles
+ */
+
+/* ==========================================================================
+   General Admin Styles
+   ========================================================================== */
+
+#w3dz_3d_360_panel {
+    padding: 20px;
+}
+
+.w3dz-360-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.w3dz-360-thumb {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: move;
+}
+
+.w3dz-360-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.w3dz-360-thumb .w3dz-remove-image {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 0, 0, 0.8);
+    color: white;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.w3dz-360-thumb .w3dz-remove-image:hover {
+    background: rgba(255, 0, 0, 1);
+}
+
+/* Camera Settings */
+.w3dz-camera-settings {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 4px;
+    margin-top: 20px;
+}
+
+.w3dz-camera-settings h4 {
+    margin: 0 0 15px 0;
+    font-size: 14px;
+    color: #23282d;
+}
+
+.w3dz-camera-presets {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.w3dz-camera-presets label {
+    margin-right: 10px;
+    font-weight: 600;
+}
+
+.w3dz-preset-btn,
+.w3dz-reset-camera-btn {
+    font-size: 13px !important;
+    padding: 4px 12px !important;
+    height: auto !important;
+}
+
+.w3dz-camera-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.w3dz-camera-inputs .form-field {
+    margin: 0 !important;
+}
+
+.w3dz-camera-inputs .form-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.w3dz-camera-inputs .form-field input[type="number"] {
+    width: 100%;
+}
+
+.w3dz-camera-inputs .form-field .description {
+    display: block;
+    margin-top: 3px;
+    font-size: 11px;
+    color: #666;
+}
+
+/* ==========================================================================
+   Visual Camera Editor Styles
+   ========================================================================== */
+
+.w3dz-visual-camera-editor {
+    margin-top: 15px;
+}
+
+.w3dz-camera-editor-placeholder {
+    background: #fff3cd;
+    border: 2px dashed #ffc107;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+}
+
+.w3dz-camera-editor-placeholder .dashicons {
+    font-size: 48px;
+    color: #ffc107;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.w3dz-camera-editor-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* 3D Preview */
+.w3dz-camera-preview {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.w3dz-camera-preview model-viewer {
+    width: 100%;
+    height: 100%;
+}
+
+.w3dz-camera-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+}
+
+.w3dz-camera-loading p {
+    margin-top: 15px;
+    color: #666;
+    font-size: 14px;
+}
+
+/* Loading Spinner */
+.w3dz-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-top-color: #0073aa;
+    border-radius: 50%;
+    animation: w3dz-spin 1s linear infinite;
+}
+
+@keyframes w3dz-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Camera Controls */
+.w3dz-camera-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.w3dz-camera-info {
+    background: #f0f6fc;
+    padding: 15px;
+    border-radius: 6px;
+    border-left: 4px solid #0073aa;
+}
+
+.w3dz-info-item label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.w3dz-info-item code {
+    display: block;
+    background: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: 'Monaco', 'Menlo', monospace;
+    color: #2271b1;
+    border: 1px solid #ddd;
+}
+
+.w3dz-camera-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.w3dz-save-camera-view {
+    transition: all 0.3s ease;
+}
+
+.w3dz-save-camera-view:disabled {
+    opacity: 0.7;
+}
+
+.w3dz-camera-presets-visual label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.w3dz-preset-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.w3dz-preset-btn-visual {
+    padding: 10px;
+    font-size: 13px;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.w3dz-preset-btn-visual:hover {
+    background: #0073aa;
+    color: white;
+    border-color: #0073aa;
+}
+
+.w3dz-camera-instructions {
+    margin-top: 15px;
+    padding: 12px;
+    background: #f0f6fc;
+    border-left: 4px solid #0073aa;
+    border-radius: 4px;
+}
+
+.w3dz-camera-instructions p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   Responsive Styles for Visual Camera Editor
+   ========================================================================== */
+
+@media screen and (max-width: 1200px) {
+    .w3dz-camera-editor-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .w3dz-camera-preview {
+        height: 400px;
+    }
+}
+
+@media screen and (max-width: 782px) {
+    .w3dz-camera-preview {
+        height: 300px;
+    }
+    
+    .w3dz-preset-buttons {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .w3dz-camera-inputs {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 782px) {
+    .w3dz-camera-inputs {
+        grid-template-columns: 1fr;
+    }
+}

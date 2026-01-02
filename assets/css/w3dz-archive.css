@@ -1,0 +1,354 @@
+/**
+ * Archive/List page styles for WooCommerce 3D Asset Display Zyne
+ * Handles hover preview styling on product listing pages
+ */
+
+/* ============================================
+   Product Image Wrapper Container
+   ============================================ */
+.w3dz-product-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.w3dz-product-image-wrapper:hover {
+    transform: translateY(-2px);
+}
+
+/* Ensure images maintain aspect ratio */
+.w3dz-product-image-wrapper img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: opacity 0.3s ease;
+}
+
+/* ============================================
+   Hover Hint Badge
+   ============================================ */
+.w3dz-hover-hint {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 3;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+    letter-spacing: 0.5px;
+}
+
+.w3dz-product-image-wrapper:hover .w3dz-hover-hint {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ============================================
+   Loading Progress Bar
+   ============================================ */
+.w3dz-hover-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    overflow: hidden;
+}
+
+.w3dz-progress-bar {
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease;
+    background-color: #0073aa; /* Default color, will be overridden by inline style */
+    box-shadow: 0 0 10px rgba(0, 115, 170, 0.5);
+}
+
+/* Progress bar pulse animation */
+@keyframes w3dz-progress-pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
+.w3dz-hover-progress {
+    animation: w3dz-progress-pulse 1.5s ease-in-out infinite;
+}
+
+/* ============================================
+   3D Viewer Overlay
+   ============================================ */
+.w3dz-viewer-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1a1a1a;
+    z-index: 5;
+}
+
+/* Model viewer inside overlay */
+.w3dz-viewer-overlay model-viewer {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: #1a1a1a;
+}
+
+/* ============================================
+   360 Degree Image Overlay (NEW)
+   ============================================ */
+.w3dz-360-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1a1a1a;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.w3dz-360-overlay.w3dz-visible {
+    opacity: 1;
+}
+
+/* 360 degree image inside overlay */
+.w3dz-360-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    cursor: grab;
+}
+
+.w3dz-360-image:active {
+    cursor: grabbing;
+}
+
+/* ============================================
+   Loading States
+   ============================================ */
+
+/* When loading, show wait cursor */
+.w3dz-product-image-wrapper[data-loading="true"] {
+    cursor: wait;
+}
+
+/* When loaded and hovering, show pointer */
+.w3dz-product-image-wrapper[data-loaded="true"]:hover {
+    cursor: pointer;
+}
+
+/* Model viewer loading state */
+.w3dz-viewer-overlay model-viewer:not(:defined) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a1a1a;
+}
+
+.w3dz-viewer-overlay model-viewer:not(:defined)::before {
+    content: "";
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: w3dz-spin 0.8s linear infinite;
+}
+
+@keyframes w3dz-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ============================================
+   Fade Transitions
+   ============================================ */
+
+/* Fade out original image when 3D loads */
+.w3dz-product-image-wrapper.w3dz-showing-3d img {
+    opacity: 0;
+}
+
+/* Fade out original image when 360 shows */
+.w3dz-product-image-wrapper.w3dz-showing-360 > img:first-child {
+    opacity: 0;
+}
+
+/* Fade in 3D overlay */
+.w3dz-viewer-overlay {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.w3dz-viewer-overlay.w3dz-visible {
+    opacity: 1;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+
+/* Tablets and below */
+@media screen and (max-width: 768px) {
+    .w3dz-hover-hint {
+        font-size: 10px;
+        padding: 5px 10px;
+        top: 8px;
+        right: 8px;
+    }
+    
+    .w3dz-hover-progress {
+        height: 3px;
+    }
+}
+
+/* Mobile devices */
+@media screen and (max-width: 480px) {
+    /* On mobile, disable hover effects (touch devices) */
+    .w3dz-product-image-wrapper:hover {
+        transform: none;
+    }
+    
+    .w3dz-hover-hint {
+        opacity: 1;
+        transform: scale(1);
+        font-size: 9px;
+        padding: 4px 8px;
+    }
+    
+    /* Show hint that they need to tap */
+    .w3dz-hover-hint::after {
+        content: ' (Tap)';
+    }
+}
+
+/* ============================================
+   Theme Compatibility Helpers
+   ============================================ */
+
+/* Ensure wrapper doesn't break flex layouts */
+.products .w3dz-product-image-wrapper,
+.woocommerce-loop-product__link .w3dz-product-image-wrapper {
+    display: block;
+}
+
+/* Fix for some themes that add padding to product images */
+.woocommerce ul.products li.product .w3dz-product-image-wrapper {
+    margin-bottom: 0;
+}
+
+/* Ensure overlay covers entire image area */
+.w3dz-product-image-wrapper {
+    line-height: 0; /* Remove line-height spacing */
+}
+
+/* ============================================
+   Accessibility
+   ============================================ */
+
+/* Focus state for keyboard navigation */
+.w3dz-product-image-wrapper:focus-within {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
+/* ============================================
+   Storefront Theme Compatibility (2025-12-26)
+   ============================================ */
+
+/* Force proper rendering in Storefront */
+.storefront .w3dz-viewer-overlay model-viewer,
+body.storefront .w3dz-viewer-overlay model-viewer {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Fix cursor states for Storefront */
+.storefront .w3dz-product-image-wrapper[data-loading="false"],
+body.storefront .w3dz-product-image-wrapper[data-loading="false"] {
+    cursor: default !important;
+}
+
+.storefront .w3dz-product-image-wrapper[data-loaded="true"]:hover,
+body.storefront .w3dz-product-image-wrapper[data-loaded="true"]:hover {
+    cursor: pointer !important;
+}
+
+/* Fix Storefront's image container styles */
+.storefront .woocommerce ul.products li.product .w3dz-product-image-wrapper,
+body.storefront .woocommerce ul.products li.product .w3dz-product-image-wrapper {
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+/* Ensure overlay covers entire area in Storefront */
+.storefront .w3dz-viewer-overlay,
+body.storefront .w3dz-viewer-overlay {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    .w3dz-product-image-wrapper,
+    .w3dz-product-image-wrapper img,
+    .w3dz-hover-hint,
+    .w3dz-progress-bar,
+    .w3dz-viewer-overlay,
+    .w3dz-360-overlay {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+@media print {
+    .w3dz-hover-hint,
+    .w3dz-hover-progress,
+    .w3dz-viewer-overlay,
+    .w3dz-360-overlay {
+        display: none !important;
+    }
+}
+
+/* ============================================
+   High Contrast Mode Support
+   ============================================ */
+@media (prefers-contrast: high) {
+    .w3dz-hover-hint {
+        background: #000;
+        border: 2px solid #fff;
+    }
+    
+    .w3dz-progress-bar {
+        background-color: #fff !important;
+    }
+}
